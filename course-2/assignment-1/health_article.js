@@ -30,10 +30,10 @@ xhr.onload = function() {
 
       // Create an h2 element for the article title
       var title = document.createElement('h2');
-      
+      console.log(title);
       // Set the text content of the title to the article's title
       title.textContent = article.title;
-
+      console.log(title);
       // Create a paragraph element for the article description
       var description = document.createElement('p');
       
