@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Report</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Container for the entire app */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form styling */
+        #weatherForm {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* Weather info styling */
+        #weatherInfo {
+            margin-top: 20px;
+        }
+
+        #weatherInfo h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        #weatherInfo p {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 1.1rem;
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        #weatherInfo p strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Loading and error message styling */
+        #weatherInfo p:not(:has(strong)) {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+
+        #weatherInfo p[style*="color: red"] {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            input[type="text"], button[type="submit"] {
+                padding: 12px 16px;
+            }
+        }
+
+        /* Animation for weather info */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #weatherInfo > * {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Weather icon styling */
+        .weather-icon {
+            font-size: 3rem;
+            margin: 20px 0;
+            display: block;
+        }
+
+        /* Temperature highlighting */
+        .temperature {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ Weather Report</h1>
+
+        <form id="weatherForm">
+            <div class="form-group">
+                <label for="city">Enter City Name:</label>
+                <input type="text" id="city" name="city" placeholder="e.g., London, New York, Tokyo">
+            </div>
+            <button type="submit">🔍 Get Weather</button>
+        </form>
+
+        <div id="weatherInfo"></div>
+    </div>
+<script src="./weather_report.js"></script>
+</body>
+</html>
