@@ -1,2 +1,0 @@
-# IBM
-Education on cousera
