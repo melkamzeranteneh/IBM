@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <title>Health Analysis Data</title>
   <link rel="stylesheet" href="./health_analysis.css">
+  <script>
+    // Apply saved theme ASAP to avoid FOUC
+    (function(){
+      try{
+        var saved = localStorage.getItem('theme');
+        if(saved){ document.documentElement.setAttribute('data-theme', saved); }
+      }catch(e){}
+    })();
+  </script>
 </head>
 <body>
    <nav><h1>Health Analysis Census</h1>
@@ -13,6 +22,7 @@
   <li><input type="text" id="conditionInput" placeholder="Enter a health condition">  </li>
   <li><button id='btnSearch'>Search</button>
   </li>
+  <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌓 Theme</button></li>
 
 </ul>
 </nav>
@@ -48,9 +58,23 @@
 <div id="report"></div>
 </div>
 <div class="searchCondition">
-    <div id="result"></div>
+    <h2>Condition Lookup</h2>
+    <div id="result">Enter a condition above and click Search.</div>
 </div>
 </div>
 <script src="./health_analysis.js"></script>
+<script>
+  // Theme toggle behavior and persistence
+  (function(){
+    var toggle = document.getElementById('themeToggle');
+    if(!toggle) return;
+    toggle.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try{ localStorage.setItem('theme', next); }catch(e){}
+    });
+  })();
+</script>
 </body>
 </html>

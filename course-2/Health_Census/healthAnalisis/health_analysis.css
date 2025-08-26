@@ -1,93 +1,190 @@
-/* Basic CSS for the navigation bar */
+/*
+  Health Analysis - Shared Styles
+  - Introduces CSS variables for theming
+  - Provides light/dark mode via [data-theme]
+  - Improves layout, spacing, and form controls
+*/
 
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+/* Theme variables */
+:root {
+  --color-bg: #f7f7f9;
+  --color-surface: #ffffff;
+  --color-text: #1f2937;
+  --color-muted: #6b7280;
+  --color-accent: #4f46e5;
+  --color-accent-contrast: #ffffff;
+  --color-border: #e5e7eb;
+  --color-nav-bg: #f0f0f0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
+  --radius: 10px;
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 16px;
+  --space-4: 20px;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0b1220;
+  --color-surface: #111827;
+  --color-text: #e5e7eb;
+  --color-muted: #9ca3af;
+  --color-accent: #8b5cf6;
+  --color-accent-contrast: #ffffff;
+  --color-border: #1f2937;
+  --color-nav-bg: #0f172a;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-md: 0 6px 16px rgba(0,0,0,0.45);
+}
+
+/* Base */
+body {
+  font-family: Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2 {
+  margin-bottom: var(--space-3);
+}
+
+/* Navigation */
 nav {
-    background-color: #f0f0f0;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-  }
-  
-  nav ul {
-    list-style-type: none;
-    /* padding: 0; */
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  /* Basic CSS for the form elements */
-  body {
-    font-family: Arial, sans-serif;
-    /* margin: 20px; */
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-  }
-  
-  div {
-    margin-bottom: 10px;
-  }
-  
-  label {
-    display: inline-block;
-    width: 100px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  select {
-    width: 200px;
-    padding: 5px;
-  }
-  
-  button {
-    padding: 7px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Basic CSS for the report section */
-  h2 {
-    margin-top: 30px;
-  }
-  
-  #report,#result {
-    padding: 10px;
-    max-width: 400px;
-    word-wrap: break-word;
-  }
-#result{
-  height: 400px;
-  width: 500px;
+  background-color: var(--color-nav-bg);
+  padding: var(--space-4);
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-sm);
 }
-  #result img{
-    width: 200px;
-    height: 100px;
-  }
-  
+
+nav h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: var(--space-3);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Layout */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.analysisForm, .searchCondition {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-4);
+}
+
+/* Form controls */
+div { /* local spacing utility for stacked fields */
+  margin-bottom: var(--space-2);
+}
+
+label {
+  display: inline-block;
+  width: 120px;
+  color: var(--color-text);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 220px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* Buttons */
+button {
+  padding: 8px 14px;
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+/* Report and results */
+h2 {
+  margin-top: 20px;
+}
+
+#report, #result {
+  padding: 12px;
+  max-width: 520px;
+  word-wrap: break-word;
+}
+
+#result {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+#result img{
+  width: 240px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Contact page quick helpers (applies when used there) */
+#contactForm {
+  max-width: 500px;
+}
+
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+}

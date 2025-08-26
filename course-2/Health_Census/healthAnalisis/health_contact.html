@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <title>Contact Us</title>
   <link rel="stylesheet" href="./health_analysis.css">
+  <script>
+    // Apply saved theme ASAP to avoid FOUC
+    (function(){
+      try{
+        var saved = localStorage.getItem('theme');
+        if(saved){ document.documentElement.setAttribute('data-theme', saved); }
+      }catch(e){}
+    })();
+  </script>
   <style>
     body{
         text-align: center;
@@ -36,6 +45,7 @@
     <ul>
       <li><a href="./index.html" id="home">Home </a></li>
       <li><a href="./health_contact.html" id="contact">Contact Us </a></li>
+      <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌓 Theme</button></li>
       </li>
 
     </ul>
@@ -63,9 +73,29 @@
     <button type="submit" onclick="thankyou()">Submit</button>
   </form>
   <script>
+    // Submit handler with simple validation and UX message
     function thankyou(){
-        alert('Thank you for contacting us!')
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var condition = document.getElementById('condition').value.trim();
+        var message = document.getElementById('message').value.trim();
+        if(!(name && email && condition && message)){
+          alert('Please complete all fields before submitting.');
+          return;
+        }
+        alert('Thank you for contacting us, '+ name + '! We will get back to you at '+ email +'.');
     }
+    // Theme toggle behavior and persistence
+    (function(){
+      var toggle = document.getElementById('themeToggle');
+      if(!toggle) return;
+      toggle.addEventListener('click', function(){
+        var current = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try{ localStorage.setItem('theme', next); }catch(e){}
+      });
+    })();
   </script>
 </body>
 </html>
